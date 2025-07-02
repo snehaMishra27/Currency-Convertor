@@ -1,56 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Currency Converter</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h2>Currency Converter</h2>
-        <form>
-            <div class="amount">
-                <p>Enter Amount</p>
-                <input value ="100" type="text">
-            </div>
+    <header>
+        <div class="logo-title">
+            <img src="assets/logo.png" alt="Logo" />
+            <h1>Currency Converter</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="openPopup('aboutPopup')">About</a></li>
+                <li><a href="#" onclick="openPopup('contactPopup')">Contact</a></li>
+                <li><button onclick="toggleTheme()">Toggle Theme</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form id="converterForm">
+            <label for="amount">Enter Amount</label>
+            <input type="number" id="amount" value="1" class="amount" min="1" />
+
             <div class="dropdown">
                 <div class="from">
                     <p>From</p>
                     <div class="select-container">
-                        <img src="https://flagsapi.com/US/flat/64.png">
-                        <select name="from">
-                            <option value="USD">USD</option>
-                            <option value="INR">INR</option>
-                            <option value="EUR">EUR</option>
-                            <option value="AUD">AUD</option>
-                        </select>
+                        <img src="https://flagsapi.com/US/flat/64.png" />
+                        <select name="from" class="currency-select"></select>
                     </div>
-                    
                 </div>
-                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                <i class="fas fa-arrow-right-arrow-left"></i>
                 <div class="to">
                     <p>To</p>
                     <div class="select-container">
-                        <img src="https://flagsapi.com/IN/flat/64.png">
-                        <select name="to">
-                            <option value="USD">USD</option>
-                            <option value="INR" selected>INR</option>
-                            <option value="EUR">EUR</option>
-                            <option value="AUD">AUD</option>
-                        </select>
+                        <img src="https://flagsapi.com/IN/flat/64.png" />
+                        <select name="to" class="currency-select"></select>
                     </div>
-                    
                 </div>
             </div>
-            
-            <button>Get Exchange Rate</button>
-            <div class="exchange-rate">Getting exchange rate</div>
+
+            <button type="submit">Get Exchange Rate</button>
         </form>
+
+        <div class="exchange-rate">Getting exchange rate...</div>
+
+        <div class="history-section">
+            <h3>Recent Conversions</h3>
+            <ul id="historyList"></ul>
+            <button onclick="clearHistory()">Clear History</button>
+        </div>
+    </main>
+
+    <!-- About Popup -->
+    <div id="aboutPopup" class="popup">
+        <div class="popup-content">
+            <span onclick="closePopup('aboutPopup')" class="close-btn">&times;</span>
+            <h2>About Us</h2>
+            <p>This modern currency converter helps you get the latest exchange rates in real time, track recent conversions, and switch themes.</p>
+        </div>
     </div>
-    <script src="code.js"></script>
-    <script src="app.js"></script>
+
+    <!-- Contact Popup -->
+    <div id="contactPopup" class="popup">
+        <div class="popup-content">
+            <span onclick="closePopup('contactPopup')" class="close-btn">&times;</span>
+            <h2>Contact Us</h2>
+            <form action="/contact" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" onclick="alert('Message has been sent')">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 📊 Exchange Rate Trend Chart -->
+    <!-- <section class="chart-section">
+    <h2>Exchange Rate Trend (Last 7 Days)</h2>
+    <canvas id="trendChart"></canvas>
+    </section> -->
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script src="script.js"></script>
 </body>
 </html>
